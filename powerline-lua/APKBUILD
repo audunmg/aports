@@ -1,0 +1,40 @@
+# Contributor: buildozer <alpine-infra@lists.alpinelinux.org>
+# Maintainer:
+pkgname=powerline-lua
+pkgver=0.1
+_commitid=d9ef4e609b1579c3025f9f800fe663391759402f
+pkgrel=0
+pkgdesc="Powerline generator in lua"
+url="https://github.com/audunmg/powerline-lua"
+arch="all"
+license="GPLv3"
+depends="lua"
+makedepends=""
+install=""
+subpackages=""
+source="https://github.com/audunmg/$pkgname/archive/$_commitid.tar.gz"
+builddir="$srcdir/$pkgname-$_commitid"
+
+_luaversions="5.1 5.2 5.3"
+
+for _v in $_luaversions; do
+  subpackages="$subpackages lua$_v-${pkgname#lua-}:_subpackage"
+done
+
+package() {
+	mkdir -p "$pkgdir"
+}
+
+_subpackage() {
+  local lver="${subpkgname:3:3}"
+  pkgdesc="$pkgdesc (for Lua $lver)"
+  depends="lua$lver"
+  install_if="$pkgname=$pkgver-r$pkgrel lua$lver"
+  local lmod_dir="$subpkgdir/usr/share/lua/$lver"
+
+  cd "$builddir"
+  mkdir -p "$lmod_dir"/powerline
+  cp -r powerline/* "$lmod_dir"/powerline/
+  install -D -m 755 powerline.lua "$pkgdir"/usr/bin/powerline-lua
+}
+sha512sums="072ec3f698b6019382d860691d8160a09175ac4ee36bd3cba0d3b9b5234038c1c4838de16519a5504cb8beb0eacd351edb43f88f961f09e39b6c39e3e256bb54  d9ef4e609b1579c3025f9f800fe663391759402f.tar.gz"
