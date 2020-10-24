@@ -23,6 +23,7 @@ done
 
 package() {
 	mkdir -p "$pkgdir"
+  install -D -m 755 powerline.lua "$pkgdir"/usr/bin/powerline-lua
 }
 
 _subpackage() {
@@ -35,6 +36,5 @@ _subpackage() {
   cd "$builddir"
   mkdir -p "$lmod_dir"/powerline
   cp -r powerline/* "$lmod_dir"/powerline/
-  install -D -m 755 powerline.lua "$pkgdir"/usr/bin/powerline-lua
 }
 sha512sums="072ec3f698b6019382d860691d8160a09175ac4ee36bd3cba0d3b9b5234038c1c4838de16519a5504cb8beb0eacd351edb43f88f961f09e39b6c39e3e256bb54  d9ef4e609b1579c3025f9f800fe663391759402f.tar.gz"
