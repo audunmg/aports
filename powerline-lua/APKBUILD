@@ -3,10 +3,10 @@
 pkgname=powerline-lua
 pkgver=0.1
 _commitid=d9ef4e609b1579c3025f9f800fe663391759402f
-pkgrel=0
+pkgrel=1
 pkgdesc="Powerline generator in lua"
 url="https://github.com/audunmg/powerline-lua"
-arch="all"
+arch="noarch"
 license="GPLv3"
 depends="lua"
 makedepends=""
